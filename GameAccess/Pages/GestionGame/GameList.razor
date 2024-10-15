@@ -1,4 +1,4 @@
-﻿@page "/exo2"
+﻿@page "/GameList"
 @using GameAccess.Models;
 <h3>GameList</h3>
 
@@ -27,7 +27,8 @@
     </div>
     <div class="col-6">
         <div>
-            <GameCreate NotifyNewGamer="LoadData"/>
+            @*<GameCreate NotifyNewGame="LoadData"/>*@
+            <GameCreate/>
         </div>
         @if(SelectedDetailId > 0)
         {
@@ -35,7 +36,7 @@
         }
         @if (SelectedUpdateId > 0)
         {
-            <GameUpdate Id="SelectedUpdateId" NotifyUpdatedGamer="LoadData" />
+            <GameUpdate Id="SelectedUpdateId" NotifyUpdatedGame="LoadData" />
         }
     </div>
 </div>

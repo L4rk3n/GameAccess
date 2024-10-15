@@ -6,7 +6,7 @@ namespace GameAccess.Services
     {
         List<Game> GetAll();
         Game GetById(int id);
-        void Save(Game gamer);
-        void Update(Game gamer);
+        void Save(Game game);
+        void Update(Game game);
     }
 }

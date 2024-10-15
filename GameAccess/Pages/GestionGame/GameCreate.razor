@@ -1,4 +1,7 @@
-﻿<div class="card">
+﻿@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "User")]
+@attribute [Authorize(Roles = "Admin")]
+<div class="card">
     <div class="card-title bg-info">
         Ajout d'un Game
     </div>
@@ -10,12 +13,12 @@
                 <ValidationMessage For="() => GameForm.Title" />
             </div>
             <div>
-                Synopsis : <InputText class="form-control form-control-sm" @bind-Value="GameForm.Synopsis" />
-                <ValidationMessage For="() => GamerForm.Synopsis" />
+                Date de parution : <InputDate class="form-control form-control-sm" @bind-Value="GameForm.ReleaseYear" />
+                <ValidationMessage For="() => GameForm.ReleaseYear" />
             </div>
             <div>
-                Date de parution : <InputDate class="form-control form-control-sm" @bind-Value="GamerForm.ReleaseYear" />
-                <ValidationMessage For="() => GamerForm.ReleaseYear" />
+                Synopsis : <InputText class="form-control form-control-sm" @bind-Value="GameForm.Synopsis" />
+                <ValidationMessage For="() => GameForm.Synopsis" />
             </div>
             
         <div><button type="submit" class="btn btn-outline-success">Valider</button></div>

@@ -2,9 +2,9 @@
 using GameAccess.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace DemoWASM.Pages.Exercices.GestionGamer
+namespace GameAccess.Pages.GestionGame
 {
-    public partial class GamerUpdate
+    public partial class GameUpdate
     {
         [Parameter]
         public int Id { get; set; }
@@ -14,7 +14,7 @@ namespace DemoWASM.Pages.Exercices.GestionGamer
         public Game CurrentGame { get; set; }
 
         [Parameter]
-        public EventCallback NotifyUpdatedGamer { get; set; }
+        public EventCallback NotifyUpdatedGame { get; set; }
         protected override void OnParametersSet()
         {
             CurrentGame = Service.GetById(Id);
@@ -23,8 +23,8 @@ namespace DemoWASM.Pages.Exercices.GestionGamer
         public void OnValidSubmit()
         {
             Service.Update(CurrentGame);
-            NotifyUpdatedGamer.InvokeAsync();
-            
+            NotifyUpdatedGame.InvokeAsync();
+
         }
     }
 }

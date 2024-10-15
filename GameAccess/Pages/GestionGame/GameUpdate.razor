@@ -1,29 +1,23 @@
-﻿<div class="card">
+﻿@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
+<div class="card">
     <div class="card-title bg-info">
-        Modification d'un Gamer
+        Modification d'un Game
     </div>
     <div class="card-body">
-        <EditForm Model="CurrentGamer" OnValidSubmit="OnValidSubmit">
+        <EditForm Model="CurrentGame" OnValidSubmit="OnValidSubmit">
             <DataAnnotationsValidator />
             <div>
-                Pseudo : <InputText class="form-control form-control-sm" @bind-Value="CurrentGamer.Pseudo" />
-                <ValidationMessage For="() => CurrentGamer.Pseudo" />
+                Title : <InputText class="form-control form-control-sm" @bind-Value="CurrentGame.Title" />
+                <ValidationMessage For="() => CurrentGame.Title" />
             </div>
             <div>
-                Email : <InputText class="form-control form-control-sm" @bind-Value="CurrentGamer.Email" />
-                <ValidationMessage For="() => CurrentGamer.Email" />
+                Date de parution : <InputDate class="form-control form-control-sm" @bind-Value="CurrentGame.ReleaseYear" />
+                <ValidationMessage For="() => CurrentGame.ReleaseYear" />
             </div>
             <div>
-                Date de naissance : <InputDate class="form-control form-control-sm" @bind-Value="CurrentGamer.BirthDate" />
-                <ValidationMessage For="() => CurrentGamer.BirthDate" />
-            </div>
-            <div>
-                Mot de passe : <InputText type="password" class="form-control form-control-sm" @bind-Value="CurrentGamer.Password" />
-                <ValidationMessage For="() => CurrentGamer.Password" />
-            </div>
-            <div>
-                Confirmation : <InputText type="password" class="form-control form-control-sm" @bind-Value="CurrentGamer.PasswordConfirm" />
-                <ValidationMessage For="() => CurrentGamer.PasswordConfirm" />
+                Synopsis : <InputText class="form-control form-control-sm" @bind-Value="CurrentGame.Synopsis" />
+                <ValidationMessage For="() => CurrentGame.Synopsis" />
             </div>
             <div><button type="submit" class="btn btn-outline-success">Valider</button></div>
         </EditForm>

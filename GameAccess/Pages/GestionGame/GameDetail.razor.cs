@@ -2,16 +2,16 @@
 using GameAccess.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace DemoWASM.Pages.Exercices.GestionGamer
+namespace GameAccess.Pages.GestionGame
 {
-    public partial class GamerDetail
+    public partial class GameDetail
     {
         [Parameter]
         public int Id { get; set; }
 
         [Inject]
         public IGameService Service { get; set; }
-        public Game CurrentGamer { get; set; }
+        public Game CurrentGame { get; set; }
 
         protected override void OnParametersSet()
         {

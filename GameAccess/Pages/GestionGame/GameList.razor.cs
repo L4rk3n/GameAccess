@@ -3,9 +3,9 @@ using GameAccess.Services;
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
 
-namespace DemoWASM.Pages.Exercices.GestionGamer
+namespace GameAccess.Pages.GestionGame
 {
-    public partial class GamerList
+    public partial class GameList
     {
         [Inject]
         public IGameService Service { get; set; }
@@ -21,13 +21,13 @@ namespace DemoWASM.Pages.Exercices.GestionGamer
             LoadData();
         }
 
-        public void LoadData() 
+        public void LoadData()
         {
             Liste = Service.GetAll();
             SelectedUpdateId = 0;
         }
 
-        public void SelectDetail(int id) 
+        public void SelectDetail(int id)
         {
             SelectedDetailId = id;
             SelectedUpdateId = 0;
