@@ -1,0 +1,41 @@
+﻿@page "/exo2"
+@using GameAccess.Models;
+<h3>GameList</h3>
+
+<div class="row">
+    <div class="col-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Game g in Liste)
+                {
+                    <tr>
+                        <td>@g.Title</td>
+                        <td class="btn-group-sm">
+                            <button class="btn btn-info btn-sm" @onclick="@(() => SelectDetail(g.Id))">Detail</button>
+                            <button class="btn btn-warning btn-sm" @onclick="@(() => SelectUpdate(g.Id))">Update</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+        <div>
+            <GameCreate NotifyNewGamer="LoadData"/>
+        </div>
+        @if(SelectedDetailId > 0)
+        {
+            <GameDetail Id="SelectedDetailId" />
+        }
+        @if (SelectedUpdateId > 0)
+        {
+            <GameUpdate Id="SelectedUpdateId" NotifyUpdatedGamer="LoadData" />
+        }
+    </div>
+</div>
