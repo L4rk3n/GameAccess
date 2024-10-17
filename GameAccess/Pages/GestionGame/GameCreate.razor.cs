@@ -21,7 +21,7 @@ namespace GameAccess.Pages.GestionGame
 
         public void OnValidSubmit()
         {
-            Service.Save(GameForm);
+            Service.Set(GameForm);
             NotifyNewGame.InvokeAsync();
             GameForm = new Game();
         }

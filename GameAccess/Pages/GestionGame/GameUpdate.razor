@@ -5,14 +5,14 @@
         Modification d'un Game
     </div>
     <div class="card-body">
-        <EditForm Model="CurrentGame" OnValidSubmit="OnValidSubmit">
+        <EditForm Model="CurrentGame" OnValidSubmit="OnValidSubmitAsync">
             <DataAnnotationsValidator />
             <div>
                 Title : <InputText class="form-control form-control-sm" @bind-Value="CurrentGame.Title" />
                 <ValidationMessage For="() => CurrentGame.Title" />
             </div>
             <div>
-                Date de parution : <InputDate class="form-control form-control-sm" @bind-Value="CurrentGame.ReleaseYear" />
+                Date de parution : <InputNumber class="form-control form-control-sm" @bind-Value="CurrentGame.ReleaseYear" />
                 <ValidationMessage For="() => CurrentGame.ReleaseYear" />
             </div>
             <div>

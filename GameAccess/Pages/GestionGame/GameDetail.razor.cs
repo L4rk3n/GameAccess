@@ -11,11 +11,12 @@ namespace GameAccess.Pages.GestionGame
 
         [Inject]
         public IGameService Service { get; set; }
-        public Game CurrentGame { get; set; }
+        public Game CurrentGame { get; set; } = new();
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            CurrentGame = Service.GetById(Id);
+            CurrentGame = await Service.Get(Id);
+            
         }
     }
 }

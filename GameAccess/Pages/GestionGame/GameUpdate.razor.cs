@@ -11,18 +11,19 @@ namespace GameAccess.Pages.GestionGame
 
         [Inject]
         public IGameService Service { get; set; }
-        public Game CurrentGame { get; set; }
+        public UpdateGame CurrentGame { get; set; }
 
         [Parameter]
         public EventCallback NotifyUpdatedGame { get; set; }
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            CurrentGame = Service.GetById(Id);
+            Game game = await Service.Get(Id);
+            CurrentGame = new UpdateGame() {Title = game.Title,ReleaseYear = game.ReleaseYear,Synopsis=game.Synopsis };
         }
 
-        public void OnValidSubmit()
+        public async Task OnValidSubmitAsync()
         {
-            Service.Update(CurrentGame);
+            await Service.Update(CurrentGame, Id);
             NotifyUpdatedGame.InvokeAsync();
 
         }

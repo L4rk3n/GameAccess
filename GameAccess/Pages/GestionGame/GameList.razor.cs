@@ -15,15 +15,15 @@ namespace GameAccess.Pages.GestionGame
         public int SelectedDetailId { get; set; }
         public int SelectedUpdateId { get; set; }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
             Liste = new List<Game>();
-            LoadData();
+            await LoadData();
         }
 
-        public void LoadData()
+        public async Task LoadData()
         {
-            Liste = Service.GetAll();
+            Liste = (List<Game>)await Service.GetAll();
             SelectedUpdateId = 0;
         }
 

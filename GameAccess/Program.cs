@@ -1,3 +1,6 @@
+using GameAccess.Pages.Auth;
+using GameAccess.Services;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -11,7 +14,9 @@ namespace GameAccess
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7050/api/") });
+            builder.Services.AddScoped < AuthenticationStateProvider, MyStateProvider>();
+            builder.Services.AddScoped<IGameService, GameService>();
 
             await builder.Build().RunAsync();
         }

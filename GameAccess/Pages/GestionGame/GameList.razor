@@ -1,5 +1,10 @@
 ﻿@page "/GameList"
-@using GameAccess.Models;
+@inject HttpClient Http
+@using GameAccess.Models
+
+@attribute [Authorize(Roles = "User")]
+@attribute [Authorize(Roles = "Admin")]
+
 <h3>GameList</h3>
 
 <div class="row">
@@ -27,7 +32,6 @@
     </div>
     <div class="col-6">
         <div>
-            @*<GameCreate NotifyNewGame="LoadData"/>*@
             <GameCreate/>
         </div>
         @if(SelectedDetailId > 0)

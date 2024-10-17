@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Authorization
+﻿
+@using Microsoft.AspNetCore.Authorization
 @attribute [Authorize(Roles = "User")]
 @attribute [Authorize(Roles = "Admin")]
 <div class="card">
@@ -13,7 +14,7 @@
                 <ValidationMessage For="() => GameForm.Title" />
             </div>
             <div>
-                Date de parution : <InputDate class="form-control form-control-sm" @bind-Value="GameForm.ReleaseYear" />
+                Date de parution : <InputNumber class="form-control form-control-sm" @bind-Value="GameForm.ReleaseYear" />
                 <ValidationMessage For="() => GameForm.ReleaseYear" />
             </div>
             <div>

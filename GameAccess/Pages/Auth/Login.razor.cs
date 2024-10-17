@@ -24,7 +24,7 @@ namespace GameAccess.Pages.Auth
         public async Task SubmitForm()
         {
             HttpResponseMessage response = 
-                await Client.PostAsJsonAsync("user/login", form);
+                await Client.PostAsJsonAsync("User/Login", form);
 
             if (!response.IsSuccessStatusCode)
             {

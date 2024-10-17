@@ -4,9 +4,11 @@ namespace GameAccess.Services
 {
     public interface IGameService
     {
-        List<Game> GetAll();
-        Game GetById(int id);
-        void Save(Game game);
-        void Update(Game game);
+        Task<Game?> Get(int id);
+        Task<IEnumerable<Game>?> GetAll();
+        Task Set(Game game);
+        Task Delete(int id);
+        Task Update(UpdateGame game,int id);
+
     }
 }

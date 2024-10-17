@@ -1,40 +1,76 @@
 ﻿using GameAccess.Models;
+using Microsoft.JSInterop;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
-namespace GameAccess.Services
+namespace GameAccess.Services 
 {
     public class GameService : IGameService
     {
-        private Dictionary<int, Game> games;
-        public GameService()
-        {
-            games = new Dictionary<int, Game>();
-            games.Add(1, new Game
-            {
-                Id = 1,
-                Title = "Test",
-                ReleaseYear = 2024,
-                Synopsis="blablabla"
+        private readonly HttpClient _httpClient;
+        private readonly IJSRuntime JS;
 
-            });
+        public GameService(HttpClient client, IJSRuntime js)
+        {
+            _httpClient = client;
+            JS = js;
         }
 
-        public List<Game> GetAll() { return games.Values.ToList(); }
-
-        public Game GetById(int id)
+        public async Task<Game?> Get(int id)
         {
-            return games[id];
+
+            string token = await JS.InvokeAsync<string>("localStorage.getItem", "token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            return await _httpClient.GetFromJsonAsync<Game>($"Game/{id}");
+
         }
 
-        public void Save(Game game)
+        public async Task<IEnumerable<Game>?> GetAll()
         {
-            game.Id = games.Values.Max(g => g.Id) + 1;
 
-            games.Add(game.Id, game);
+            string token = await JS.InvokeAsync<string>("localStorage.getItem", "token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            return await _httpClient.GetFromJsonAsync<IEnumerable<Game>>($"Game/all");
+            
         }
 
-        public void Update(Game game)
+        public async Task Set(Game game)
         {
-            games[game.Id] = game;
+
+            string token = await JS.InvokeAsync<string>("localStorage.getItem", "token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            await _httpClient.PostAsJsonAsync($"Game/ajout",game);
+
         }
+
+        public async Task Update(UpdateGame game,int id )
+        {
+
+            string token = await JS.InvokeAsync<string>("localStorage.getItem", "token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            await _httpClient.PutAsJsonAsync($"Game/Update/{id}", game);
+
+        }
+
+        public async Task Delete( int id)
+        {
+
+            string token = await JS.InvokeAsync<string>("localStorage.getItem", "token");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            await _httpClient.DeleteAsync($"Game/Delete/{id}");
+
+        }
+
+
     }
 }
