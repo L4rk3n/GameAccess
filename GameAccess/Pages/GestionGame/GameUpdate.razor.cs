@@ -11,7 +11,7 @@ namespace GameAccess.Pages.GestionGame
 
         [Inject]
         public IGameService Service { get; set; }
-        public UpdateGame CurrentGame { get; set; }
+        public UpdateGame CurrentGame { get; set; } = new();
 
         [Parameter]
         public EventCallback NotifyUpdatedGame { get; set; }
