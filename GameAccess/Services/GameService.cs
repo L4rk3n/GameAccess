@@ -45,7 +45,7 @@ namespace GameAccess.Services
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            await _httpClient.PostAsJsonAsync($"Game/ajout",game);
+            _httpClient.PostAsJsonAsync($"Game/ajout",game);
 
         }
 
@@ -67,7 +67,7 @@ namespace GameAccess.Services
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            await _httpClient.DeleteAsync($"Game/Delete/{id}");
+            _httpClient.DeleteAsync($"Game/Delete/{id}");
 
         }
 

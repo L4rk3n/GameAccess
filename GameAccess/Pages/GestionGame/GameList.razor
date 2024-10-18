@@ -12,8 +12,9 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Pseudo</th>
+                    <th>Title</th>
                     <th>Actions</th>
+                    <th><button class="btn btn-success btn-sm" @onclick="@(() => SelectNewGame(-1))">Ajout</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@
                         <td class="btn-group-sm">
                             <button class="btn btn-info btn-sm" @onclick="@(() => SelectDetail(g.Id))">Detail</button>
                             <button class="btn btn-warning btn-sm" @onclick="@(() => SelectUpdate(g.Id))">Update</button>
+                            <button class="btn btn-danger btn-sm" @onclick="@(() => SelectDelete(g.Id))">Delete</button>
                         </td>
                     </tr>
                 }
@@ -31,9 +33,10 @@
         </table>
     </div>
     <div class="col-6">
-        <div>
-            <GameCreate/>
-        </div>
+        @if (SelectedNewGameId < 0)
+        {
+                <GameCreate NotifyNewGame="LoadData" />
+        }
         @if(SelectedDetailId > 0)
         {
             <GameDetail Id="SelectedDetailId" />
@@ -41,6 +44,10 @@
         @if (SelectedUpdateId > 0)
         {
             <GameUpdate Id="SelectedUpdateId" NotifyUpdatedGame="LoadData" />
+        }
+        @if (SelectedDeleteId > 0)
+        {
+            <GameDelete Id="SelectedDeleteId" NotifyDeletedGame="LoadData" />
         }
     </div>
 </div>

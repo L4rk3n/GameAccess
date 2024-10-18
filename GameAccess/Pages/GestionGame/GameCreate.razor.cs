@@ -24,6 +24,7 @@ namespace GameAccess.Pages.GestionGame
             Service.Set(GameForm);
             NotifyNewGame.InvokeAsync();
             GameForm = new Game();
+
         }
     }
 }
